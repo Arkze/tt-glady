@@ -11,3 +11,14 @@ services:
       - POSTGRES_PASSWORD=S3cret
       - POSTGRES_USER=glady
       - POSTGRES_DB=gladytt
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gladytt
+      SPRING_DATASOURCE_USERNAME: glady
+      SPRING_DATASOURCE_PASSWORD: S3cret

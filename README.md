@@ -12,18 +12,18 @@ This project is a Wedoogift-inspired backend application that handles the distri
 
 ## 🚀 Tech Stack
 
-| Layer            | Technology                        |
-|------------------|-----------------------------------|
-| Language         | Java 21                            |
-| Build Tool       | Maven                              |
-| Framework        | Spring Boot 3.4+                   |
-| Persistence      | PostgreSQL                         |
-| ORM              | Spring Data JPA + Hibernate        |
-| Message Broker   | Kafka (event-driven architecture)  |
-| Containerization | Docker + Docker Compose            |
-| Architecture     | Hexagonal Architecture (Ports & Adapters) |
-| API              | RESTful JSON API                   |
-| Testing          | JUnit 5 + Mockito                  |
+| Layer            | Technology                                                        |
+|------------------|-------------------------------------------------------------------|
+| Language         | Java 21                                                           |
+| Build Tool       | Gradle                                                            |
+| Framework        | Spring Boot 3.4+                                                  |
+| Persistence      | PostgreSQL                                                        |
+| ORM              | Spring Data JPA + Hibernate                                       |
+| Message Broker   | Kafka (event-driven architecture) (If microservices architecture) |
+| Containerization | Docker + Docker Compose                                           |
+| Architecture     | Hexagonal Architecture (Ports & Adapters)                         |
+| API              | RESTful JSON API                                                  |
+| Testing          | JUnit 5 + Mockito                                                 |
 
 ---
 
@@ -83,7 +83,7 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 - Docker & Docker Compose
 - Gradle
 
-### 1. Start PostgreSQL with Docker
+### 1. Start App with Docker compose
 
 ```bash
-docker-compose up -d && ./gradlew bootRun --args='--debug'
+docker-compose up --build
