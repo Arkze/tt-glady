@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Wedoogift Backend challenge
 Thank you for your interest in joining our team!
 Please complete the following challenge, and we will be glad to review your code and provide feedback.
@@ -206,4 +205,3 @@ And then open the file in "/build/jacocoHtml/index.html" inside your web-browser
    - Add support for deposit history and cancellation
 
    - Integrate Kafka or messaging for asynchronous events (with micro-services based architecture)
->>>>>>> main-branch
