@@ -1,7 +1,7 @@
 ## How to start the app
 
 - Run "docker-compose up"
-- Export the postMan collection to postMan
+- Export the postMan collection (glady_postman_collection) to postMan
 - Use Postman collection to : create user/company, credit company, gift/meal deposit to a user's balance
 
 # 💸 Wedoogift Clone — Gift & Meal Deposit Platform
@@ -91,7 +91,7 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 
 ---
 
-💼 Transaction Management
+## 💼 Transaction Management
 
 This application uses Spring's declarative transaction management to ensure data integrity across multiple operations.
 
@@ -129,6 +129,17 @@ docker-compose up --build
 
 - Have fun testing ! :)
 
+### 4. Launcing tests with Jacoco test coverage report :
+
+```bash 
+ ./gradlew test jacocoTestReport
+```
+
+And then open the file in "/build/jacocoHtml/index.html" inside your web-browser
+
+----
+
+## Routes
 
 - **UserController**
   - `POST /api/users` - Create a new user
@@ -145,7 +156,7 @@ docker-compose up --build
   - `POST /api/deposits/distribute` - Distribute a gift or meal deposit
 
 
-## 🔧 Future Enhancements
+## 🔧 (Possible) Future Enhancements in a real scenario
 
    -  Add authentication/authorization (JWT, OAuth2, etc.)
 
@@ -153,4 +164,4 @@ docker-compose up --build
 
    - Add support for deposit history and cancellation
 
-   - Integrate Kafka or messaging for asynchronous events
+   - Integrate Kafka or messaging for asynchronous events (with micro-services based architecture)

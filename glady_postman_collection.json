@@ -107,7 +107,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/companies/9eba5b90-0fae-4f04-8460-09d7bc88784b/balance",
+					"raw": "http://localhost:8080/api/companies/62bc8d22-83c7-4dd7-82f2-6e4d513ab953/balance",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -116,7 +116,7 @@
 					"path": [
 						"api",
 						"companies",
-						"9eba5b90-0fae-4f04-8460-09d7bc88784b",
+						"62bc8d22-83c7-4dd7-82f2-6e4d513ab953",
 						"balance"
 					]
 				}
@@ -130,7 +130,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"companyId\":\"9eba5b90-0fae-4f04-8460-09d7bc88784b\",\n    \"userId\":\"ba67362e-9e68-467d-95b9-fe3b4e52dade\",\n    \"amount\":\"100\",\n    \"type\":\"MEAL\"\n}",
+					"raw": "{\n    \"companyId\":\"62bc8d22-83c7-4dd7-82f2-6e4d513ab953\",\n    \"userId\":\"fdc5416e-314c-4860-a4d7-4f95d9a47c8e\",\n    \"amount\":\"55.5\",\n    \"type\":\"MEAL\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -160,7 +160,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"companyId\":\"9eba5b90-0fae-4f04-8460-09d7bc88784b\",\n    \"userId\":\"ba67362e-9e68-467d-95b9-fe3b4e52dade\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
+					"raw": "{\n    \"companyId\":\"9eba5b90-0fae-4f04-8460-09d7bc88784\",\n    \"userId\":\"ba67362e-9e68-467d-95b9-fe3b4e52dade\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -184,44 +184,6 @@
 			"response": []
 		},
 		{
-			"name": "Get User's Balance",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"companyId\":\"\",\n    \"userId\":\"\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/users?name=test",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "test"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get Users Deposits",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -239,7 +201,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/users/{userId}/deposits",
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/deposits",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -248,8 +210,65 @@
 					"path": [
 						"api",
 						"users",
-						"{userId}",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
 						"deposits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User's Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User's Balance For Specific Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\":\"\",\n    \"userId\":\"\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/MEAL/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
+						"MEAL",
+						"balance"
 					]
 				}
 			},

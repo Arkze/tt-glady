@@ -72,10 +72,13 @@ public class DistributeDepositService implements DistributeDepositUseCase {
             throw new InsufficientFundException(ife.getMessage());
         }
 
+        if (type == null) {
+            throw new DepositBadTypeException("Deposit type must not be null");
+        }
+
         Deposit deposit = switch (type) {
             case GIFT -> new GiftDeposit(amount, LocalDate.now());
             case MEAL -> new MealDeposit(amount, LocalDate.now());
-            default -> throw new DepositBadTypeException("Unsupported deposit type: " + type);
         };
 
         user.addDeposit(deposit);
