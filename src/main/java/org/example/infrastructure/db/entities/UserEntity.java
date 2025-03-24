@@ -1,0 +1,38 @@
+package org.example.infrastructure.db.entities;
+
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+public class UserEntity {
+    @Id @GeneratedValue
+    private UUID id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<DepositEntity> deposits;
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<DepositEntity> getDeposits() {
+        return this.deposits;
+    }
+}
+
