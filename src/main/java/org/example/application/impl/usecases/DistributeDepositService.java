@@ -1,7 +1,7 @@
 package org.example.application.impl.usecases;
 
 
-import org.example.application.usecases.deposit.DistributeDepositUseCase;
+import org.example.domain.ports.input.deposit.DistributeDepositUseCase;
 import org.example.domain.models.*;
 import org.example.domain.models.enums.DepositType;
 import org.example.domain.ports.output.CompanyRepository;

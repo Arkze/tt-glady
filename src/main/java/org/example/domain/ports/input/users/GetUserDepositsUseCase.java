@@ -1,4 +1,4 @@
-package org.example.application.usecases.users;
+package org.example.domain.ports.input.users;
 
 
 import org.example.application.dtos.DepositDto;

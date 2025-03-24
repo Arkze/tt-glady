@@ -1,9 +1,8 @@
 package org.example.application.impl.usecases;
 
-import org.example.application.usecases.users.GetUserBalanceUseCase;
+import org.example.domain.ports.input.users.GetUserBalanceUseCase;
 import org.example.domain.models.Deposit;
 import org.example.domain.ports.output.DepositRepository;
-import org.example.domain.ports.output.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

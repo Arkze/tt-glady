@@ -1,6 +1,6 @@
 package org.example.application.impl.usecases;
 
-import org.example.application.usecases.company.CreditCompanyBalanceUseCase;
+import org.example.domain.ports.input.company.CreditCompanyBalanceUseCase;
 import org.example.domain.models.Company;
 import org.example.domain.ports.output.CompanyRepository;
 import org.springframework.stereotype.Service;

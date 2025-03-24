@@ -1,12 +1,10 @@
 package org.example.infrastructure.rest;
 
 import org.example.application.dtos.DepositDto;
-import org.example.application.usecases.deposit.DistributeDepositUseCase;
-import org.example.application.usecases.users.CreateUserUseCase;
-import org.example.application.usecases.users.GetUserBalanceUseCase;
-import org.example.application.usecases.users.GetUserDepositsUseCase;
+import org.example.domain.ports.input.users.CreateUserUseCase;
+import org.example.domain.ports.input.users.GetUserBalanceUseCase;
+import org.example.domain.ports.input.users.GetUserDepositsUseCase;
 import org.example.domain.models.User;
-import org.example.domain.models.enums.DepositType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

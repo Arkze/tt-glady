@@ -1,4 +1,4 @@
-package org.example.application.usecases.company;
+package org.example.domain.ports.input.company;
 
 import org.example.domain.models.Company;
 

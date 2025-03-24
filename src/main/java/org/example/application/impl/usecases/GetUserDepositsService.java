@@ -1,7 +1,7 @@
 package org.example.application.impl.usecases;
 
 import org.example.application.dtos.DepositDto;
-import org.example.application.usecases.users.GetUserDepositsUseCase;
+import org.example.domain.ports.input.users.GetUserDepositsUseCase;
 import org.example.domain.models.GiftDeposit;
 import org.example.domain.models.enums.DepositStatus;
 import org.example.domain.models.enums.DepositType;

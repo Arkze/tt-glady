@@ -1,7 +1,7 @@
 package org.example.application.impl.usecases;
 
 
-import org.example.application.usecases.users.CreateUserUseCase;
+import org.example.domain.ports.input.users.CreateUserUseCase;
 import org.example.domain.models.User;
 import org.example.domain.ports.output.UserRepository;
 import org.example.infrastructure.mappers.UserMapper;

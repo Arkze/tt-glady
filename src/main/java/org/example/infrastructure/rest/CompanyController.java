@@ -1,9 +1,9 @@
 package org.example.infrastructure.rest;
 
 
-import org.example.application.usecases.company.CreateCompanyUseCase;
-import org.example.application.usecases.company.CreditCompanyBalanceUseCase;
-import org.example.application.usecases.company.GetCompanyBalanceUseCase;
+import org.example.domain.ports.input.company.CreateCompanyUseCase;
+import org.example.domain.ports.input.company.CreditCompanyBalanceUseCase;
+import org.example.domain.ports.input.company.GetCompanyBalanceUseCase;
 import org.example.domain.models.Company;
 import org.example.infrastructure.rest.dtos.CreditBalanceRequestDTO;
 import org.springframework.http.ResponseEntity;
