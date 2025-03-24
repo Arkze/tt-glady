@@ -70,7 +70,7 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 ### Infrastructure Layer (`infrastructure`)
 - Implements repositories with Spring Data JPA
 - REST controllers (`DepositController`, `UserController`, `CompanyController`)
-- Kafka integration
+- Kafka integration (if using micro services)
 - PostgreSQL setup
 
 ---
