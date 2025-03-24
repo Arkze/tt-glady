@@ -54,6 +54,22 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 
 ---
 
+## ✅ Design Patterns in Use
+
+| Pattern                      | Usage                                                                 |
+|-----------------------------|------------------------------------------------------------------------|
+| **Hexagonal Architecture**  | Core design structure separating domain, application, and infrastructure |
+| **Repository Pattern**      | `UserRepository`, `CompanyRepository`, `DepositRepository` interfaces and their adapters |
+| **Strategy Pattern**        | Abstract `Deposit` class with `GiftDeposit` and `MealDeposit` implementations |
+| **DTO Pattern**             | `DepositDto`, `DistributeDepositRequestDTO`, `CreditBalanceRequestDTO` |
+| **Factory (Simple)**        | In `DistributeDepositService`, a `switch` creates different `Deposit` objects |
+| **Mapper Pattern**          | `UserMapper`, `CompanyMapper`, `DepositMapper` convert between entities and domain models |
+| **Service Pattern**         | All use cases are implemented as Spring `@Service` classes |
+| **Dependency Injection**    | Spring manages and injects all dependencies via constructors |
+| **Record Pattern**          | DTOs are implemented as Java `record` types for conciseness and immutability |
+
+---
+
 ## 🧩 Modules Overview
 
 ### Domain Layer (`domain`)
@@ -75,6 +91,23 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 
 ---
 
+💼 Transaction Management
+
+This application uses Spring's declarative transaction management to ensure data integrity across multiple operations.
+
+For example, in the DistributeDepositService, the process of:
+
+    Debiting the company's balance,
+
+    Creating and assigning a deposit to the user,
+
+    Saving the updated company, user, and deposit,
+
+...is wrapped in a single transaction using Spring's @Transactional annotation (to be added at the class or method level). This guarantees that if any step fails (e.g., insufficient company balance), none of the changes are persisted, preventing partial updates or data inconsistencies.
+
+    🔒 This protects your system from scenarios like a deposit being created without the corresponding company debit, or vice versa.
+
+
 ## 🛠️ Running the Project
 
 ### Pre-requisites
@@ -95,3 +128,29 @@ docker-compose up --build
 ### 3. Import postman_collection.json to YOUR postman
 
 - Have fun testing ! :)
+
+
+- **UserController**
+  - `POST /api/users` - Create a new user
+  - `GET /api/users/{userId}/balance` - Get user balance
+  - `GET /api/users/{userId}/{type}/balance` - Get user balance for specific type of deposit
+  - `GET /api/users/{userId}/deposits` - Get all deposits for a user
+
+- **CompanyController**
+  - `POST /api/companies` - Create a new company
+  - `POST /api/companies/{companyId}/credit` - Credit company balance
+  - `GET /api/companies/{companyId}/balance` - Get company balance
+
+- **DepositController**
+  - `POST /api/deposits/distribute` - Distribute a gift or meal deposit
+
+
+## 🔧 Future Enhancements
+
+   -  Add authentication/authorization (JWT, OAuth2, etc.)
+
+   - Implement domain events (Observer/Event pattern)
+
+   - Add support for deposit history and cancellation
+
+   - Integrate Kafka or messaging for asynchronous events

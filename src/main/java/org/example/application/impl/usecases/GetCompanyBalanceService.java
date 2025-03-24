@@ -1,5 +1,6 @@
 package org.example.application.impl.usecases;
 
+import org.example.domain.models.Company;
 import org.example.domain.ports.input.company.GetCompanyBalanceUseCase;
 import org.example.domain.exceptions.CompanyNotFoundException;
 import org.example.domain.ports.output.CompanyRepository;

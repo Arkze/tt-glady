@@ -1,9 +1,11 @@
 package org.example.application.impl.usecases;
 
+import org.example.domain.exceptions.CompanyNotFoundException;
 import org.example.domain.ports.input.company.CreditCompanyBalanceUseCase;
 import org.example.domain.models.Company;
 import org.example.domain.ports.output.CompanyRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -31,12 +33,14 @@ public class CreditCompanyBalanceService implements CreditCompanyBalanceUseCase 
      *
      * @param companyId the UUID of the company
      * @param amount    the amount to credit
-     * @throws java.util.NoSuchElementException if the company is not found
-     * @throws IllegalArgumentException if the amount is negative
+     * @throws CompanyNotFoundException if the amount is negative
      */
     @Override
+    @Transactional
     public void credit(UUID companyId, BigDecimal amount) {
-        Company company = this.companyRepository.findById(companyId).orElseThrow();
+        Company company = this.companyRepository.findById(companyId)
+                .orElseThrow(() -> new CompanyNotFoundException("Company not found with id: " + companyId));
+
         company.credit(amount);
         companyRepository.save(company);
     }

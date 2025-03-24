@@ -1,20 +1,24 @@
 package org.example.application.impl.usecases;
 
-import org.example.domain.ports.input.deposit.DistributeDepositUseCase;
+import org.example.domain.exceptions.CompanyNotFoundException;
+import org.example.domain.exceptions.DepositBadTypeException;
+import org.example.domain.exceptions.InsufficientFundException;
+import org.example.domain.exceptions.UserNotFoundException;
 import org.example.domain.models.*;
 import org.example.domain.models.enums.DepositType;
+import org.example.domain.ports.input.deposit.DistributeDepositUseCase;
 import org.example.domain.ports.output.CompanyRepository;
 import org.example.domain.ports.output.DepositRepository;
 import org.example.domain.ports.output.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Service that handles the distribution of a deposit from a company to a user.
- * Implements the {@link DistributeDepositUseCase} interface.
+ * Service responsible for distributing deposits from companies to users.
  */
 @Service
 public class DistributeDepositService implements DistributeDepositUseCase {
@@ -23,13 +27,6 @@ public class DistributeDepositService implements DistributeDepositUseCase {
     private final CompanyRepository companyRepository;
     private final DepositRepository depositRepository;
 
-    /**
-     * Constructs the service with required repositories.
-     *
-     * @param userRepository    the user repository
-     * @param companyRepository the company repository
-     * @param depositRepository the deposit repository
-     */
     public DistributeDepositService(UserRepository userRepository,
                                     CompanyRepository companyRepository,
                                     DepositRepository depositRepository) {
@@ -54,19 +51,31 @@ public class DistributeDepositService implements DistributeDepositUseCase {
      * @param userId    the UUID of the user
      * @param amount    the amount to deposit
      * @param type      the type of deposit (GIFT or MEAL)
-     * @throws java.util.NoSuchElementException if the user or company does not exist
-     * @throws IllegalArgumentException if the company does not have sufficient balance
+     * @throws UserNotFoundException    if the user does not exist
+     * @throws CompanyNotFoundException if the company does not exist
+     * @throws IllegalArgumentException if the company has insufficient balance
+     * @throws DepositBadTypeException  if the deposit type is not recognized
+     * @throws InsufficientFundException if the balance of the company is too low
      */
     @Override
+    @Transactional(rollbackFor = {UserNotFoundException.class, CompanyNotFoundException.class, IllegalArgumentException.class, DepositBadTypeException.class, InsufficientFundException.class})
     public void distribute(UUID companyId, UUID userId, BigDecimal amount, DepositType type) {
-        User user = userRepository.findById(userId).orElseThrow();
-        Company company = companyRepository.findById(companyId).orElseThrow();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userId));
 
-        company.debit(amount);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new CompanyNotFoundException("Company not found with id: " + companyId));
+
+        try {
+            company.debit(amount);
+        } catch (InsufficientFundException ife) {
+            throw new InsufficientFundException(ife.getMessage());
+        }
 
         Deposit deposit = switch (type) {
             case GIFT -> new GiftDeposit(amount, LocalDate.now());
             case MEAL -> new MealDeposit(amount, LocalDate.now());
+            default -> throw new DepositBadTypeException("Unsupported deposit type: " + type);
         };
 
         user.addDeposit(deposit);

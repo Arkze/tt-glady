@@ -1,5 +1,7 @@
 package org.example.domain.models;
 
+import org.example.domain.exceptions.InsufficientFundException;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -47,7 +49,7 @@ public class Company {
      */
     public void debit(BigDecimal amount) {
         if (balance.compareTo(amount) < 0) {
-            throw new IllegalArgumentException("Insufficient balance");
+            throw new InsufficientFundException("Insufficient balance");
         }
         balance = balance.subtract(amount);
     }
