@@ -12,15 +12,29 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Service for retrieving all deposits for a user.
+ */
 @Service
 public class GetUserDepositsService implements GetUserDepositsUseCase {
 
     private final DepositRepository depositRepository;
 
+    /**
+     * Constructs the service with the given deposit repository.
+     *
+     * @param depositRepository the deposit repository
+     */
     public GetUserDepositsService(DepositRepository depositRepository) {
         this.depositRepository = depositRepository;
     }
 
+    /**
+     * Retrieves all deposits for the given user ID, converting them into DTOs.
+     *
+     * @param userId the ID of the user
+     * @return a list of deposit DTOs
+     */
     @Override
     public List<DepositDto> getAll(UUID userId) {
         return this.depositRepository.findAllForUser(userId).stream().map(deposit -> {
@@ -34,5 +48,4 @@ public class GetUserDepositsService implements GetUserDepositsUseCase {
             );
         }).toList();
     }
-
 }

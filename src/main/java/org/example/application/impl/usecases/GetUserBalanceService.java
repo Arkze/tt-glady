@@ -9,15 +9,29 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Service for calculating the total non-expired balance of a user.
+ */
 @Service
 public class GetUserBalanceService implements GetUserBalanceUseCase {
 
     private final DepositRepository depositRepository;
 
+    /**
+     * Constructs the service with the given deposit repository.
+     *
+     * @param depositRepository the deposit repository
+     */
     public GetUserBalanceService(DepositRepository depositRepository) {
         this.depositRepository = depositRepository;
     }
 
+    /**
+     * Calculates the total balance of all valid (non-expired) deposits for a user.
+     *
+     * @param userId the ID of the user
+     * @return the current balance
+     */
     @Override
     public BigDecimal getBalance(UUID userId) {
         return depositRepository.findAllForUser(userId).stream()

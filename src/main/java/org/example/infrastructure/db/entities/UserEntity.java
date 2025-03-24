@@ -5,9 +5,14 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * JPA entity representing a user in the system.
+ * A user can receive multiple deposits.
+ */
 @Entity
 public class UserEntity {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private UUID id;
 
     private String name;
@@ -15,6 +20,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DepositEntity> deposits;
 
+    /**
+     * @return the unique identifier of the user
+     */
     public UUID getId() {
         return this.id;
     }
@@ -23,6 +31,9 @@ public class UserEntity {
         this.id = id;
     }
 
+    /**
+     * @return the name of the user
+     */
     public String getName() {
         return this.name;
     }
@@ -31,8 +42,10 @@ public class UserEntity {
         this.name = name;
     }
 
+    /**
+     * @return list of deposits assigned to the user
+     */
     public List<DepositEntity> getDeposits() {
         return this.deposits;
     }
 }
-

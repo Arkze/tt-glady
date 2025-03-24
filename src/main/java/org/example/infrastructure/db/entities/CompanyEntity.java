@@ -1,21 +1,27 @@
 package org.example.infrastructure.db.entities;
 
-
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * JPA entity representing a company.
+ * A company can distribute deposits to users.
+ */
 @Entity
 public class CompanyEntity {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private UUID id;
 
     private String name;
 
-    private java.math.BigDecimal balance;
+    private BigDecimal balance;
 
+    /**
+     * @return the unique identifier of the company
+     */
     public UUID getId() {
         return this.id;
     }
@@ -24,6 +30,9 @@ public class CompanyEntity {
         this.id = id;
     }
 
+    /**
+     * @return the name of the company
+     */
     public String getName() {
         return this.name;
     }
@@ -32,6 +41,9 @@ public class CompanyEntity {
         this.name = name;
     }
 
+    /**
+     * @return the current balance of the company
+     */
     public BigDecimal getBalance() {
         return this.balance;
     }
@@ -40,4 +52,3 @@ public class CompanyEntity {
         this.balance = amount;
     }
 }
-

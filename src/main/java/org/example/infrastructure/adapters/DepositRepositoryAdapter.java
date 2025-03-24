@@ -15,6 +15,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Adapter for deposit repository, responsible for storing and retrieving deposits.
+ */
 @Repository
 public class DepositRepositoryAdapter implements DepositRepository {
 
@@ -24,18 +27,35 @@ public class DepositRepositoryAdapter implements DepositRepository {
         this.depositJpaRepository = depositJpaRepository;
     }
 
+    /**
+     * Not implemented. Reserved for future use if needed.
+     */
     @Override
     public Optional<Deposit> findById(UUID id) {
         return Optional.empty();
     }
 
+    /**
+     * Saves a deposit assigned to a user and company.
+     *
+     * @param deposit the deposit object
+     * @param user the user who receives the deposit
+     * @param company the company who distributes the deposit
+     * @param type the type of the deposit
+     */
     public void save(Deposit deposit, User user, Company company, DepositType type) {
         DepositEntity entity = DepositMapper.toEntity(deposit, type);
-        entity.setUser(UserMapper.toEntity((user)));
+        entity.setUser(UserMapper.toEntity(user));
         entity.setCompany(CompanyMapper.toEntity(company));
         depositJpaRepository.save(entity);
     }
 
+    /**
+     * Retrieves all deposits assigned to a user.
+     *
+     * @param userId the ID of the user
+     * @return list of domain deposits
+     */
     @Override
     public List<Deposit> findAllForUser(UUID userId) {
         return depositJpaRepository.findAllByUserId(userId).stream()
@@ -46,6 +66,12 @@ public class DepositRepositoryAdapter implements DepositRepository {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves all non-expired deposits for a user.
+     *
+     * @param userId the ID of the user
+     * @return list of valid (not expired) deposits
+     */
     public List<Deposit> findAllValidDepositsForUser(UUID userId) {
         return depositJpaRepository.findAllByUserId(userId).stream()
                 .filter(d -> d.getExpirationDate().isAfter(java.time.LocalDate.now()))

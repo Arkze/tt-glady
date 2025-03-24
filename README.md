@@ -87,3 +87,11 @@ This project is designed around **Hexagonal Architecture**, which separates **do
 
 ```bash
 docker-compose up --build
+```
+
+### 2. Access swagger :
+ 👉 http://localhost:8080/swagger-ui.html or http://localhost:8080/swagger-ui/index.html
+
+### 3. Import postman_collection.json to YOUR postman
+
+- Have fun testing ! :)

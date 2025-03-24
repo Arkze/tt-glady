@@ -1,17 +1,20 @@
 package org.example.infrastructure.db.entities;
 
-
 import jakarta.persistence.*;
 import org.example.domain.models.enums.DepositType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * JPA entity representing a deposit (gift or meal).
+ * A deposit is associated with both a user and a company.
+ */
 @Entity
 public class DepositEntity {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private UUID id;
 
     @Enumerated(EnumType.STRING)
@@ -29,7 +32,9 @@ public class DepositEntity {
     @ManyToOne
     private CompanyEntity company;
 
-
+    /**
+     * @return the unique identifier of the deposit
+     */
     public UUID getId() {
         return this.id;
     }
@@ -38,6 +43,9 @@ public class DepositEntity {
         this.id = id;
     }
 
+    /**
+     * @return the type of deposit (GIFT or MEAL)
+     */
     public DepositType getType() {
         return this.type;
     }
@@ -46,6 +54,9 @@ public class DepositEntity {
         this.type = type;
     }
 
+    /**
+     * @return the monetary value of the deposit
+     */
     public BigDecimal getAmount() {
         return this.amount;
     }
@@ -54,6 +65,9 @@ public class DepositEntity {
         this.amount = amount;
     }
 
+    /**
+     * @return the date the deposit was made
+     */
     public LocalDate getDistributionDate() {
         return distributionDate;
     }
@@ -62,6 +76,9 @@ public class DepositEntity {
         this.distributionDate = distributionDate;
     }
 
+    /**
+     * @return the expiration date of the deposit
+     */
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
@@ -70,6 +87,9 @@ public class DepositEntity {
         this.expirationDate = expirationDate;
     }
 
+    /**
+     * @return the user associated with this deposit
+     */
     public UserEntity getUser() {
         return user;
     }
@@ -78,6 +98,9 @@ public class DepositEntity {
         this.user = user;
     }
 
+    /**
+     * @return the company that distributed this deposit
+     */
     public CompanyEntity getCompany() {
         return company;
     }
@@ -85,6 +108,4 @@ public class DepositEntity {
     public void setCompany(CompanyEntity company) {
         this.company = company;
     }
-
 }
-
