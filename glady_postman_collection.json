@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "26fc9e78-9d1d-474e-a579-a6fe00f36eb0",
+		"name": "Todo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12504309"
+	},
+	"item": [
+		{
+			"name": "Create User Glady",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users?name=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company Glady",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/companies?name=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"companies"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Credit Company Balance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\":\"1000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/companies/9eba5b90-0fae-4f04-8460-09d7bc88784b/credit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"companies",
+						"9eba5b90-0fae-4f04-8460-09d7bc88784b",
+						"credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Company Balance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\":\"1000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/companies/62bc8d22-83c7-4dd7-82f2-6e4d513ab953/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"companies",
+						"62bc8d22-83c7-4dd7-82f2-6e4d513ab953",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MEAL 100 DEPOSIT from a company to a user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\":\"62bc8d22-83c7-4dd7-82f2-6e4d513ab953\",\n    \"userId\":\"fdc5416e-314c-4860-a4d7-4f95d9a47c8e\",\n    \"amount\":\"55.5\",\n    \"type\":\"MEAL\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/deposits/distribute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"deposits",
+						"distribute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GIFT 100 DEPOSIT from a company to a user Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\":\"9eba5b90-0fae-4f04-8460-09d7bc88784\",\n    \"userId\":\"ba67362e-9e68-467d-95b9-fe3b4e52dade\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/deposits/distribute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"deposits",
+						"distribute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users Deposits",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\":\"\",\n    \"userId\":\"\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/deposits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
+						"deposits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User's Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User's Balance For Specific Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\":\"\",\n    \"userId\":\"\",\n    \"amount\":\"100\",\n    \"type\":\"GIFT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/fdc5416e-314c-4860-a4d7-4f95d9a47c8e/MEAL/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"fdc5416e-314c-4860-a4d7-4f95d9a47c8e",
+						"MEAL",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
