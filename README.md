@@ -1,6 +1,6 @@
 ## How to start the app
 
-- Run "docker-compose up"
+- Run "docker-compose up --build"
 - Export the postMan collection (glady_postman_collection) to postMan
 - Use Postman collection to : create user/company, credit company, gift/meal deposit to a user's balance
 
