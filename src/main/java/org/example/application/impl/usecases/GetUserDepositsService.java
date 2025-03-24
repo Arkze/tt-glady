@@ -1,6 +1,6 @@
 package org.example.application.impl.usecases;
 
-import org.example.application.dtos.DepositDto;
+import org.example.application.dtos.DepositDTO;
 import org.example.domain.ports.input.users.GetUserDepositsUseCase;
 import org.example.domain.models.GiftDeposit;
 import org.example.domain.models.enums.DepositStatus;
@@ -36,10 +36,10 @@ public class GetUserDepositsService implements GetUserDepositsUseCase {
      * @return a list of deposit DTOs
      */
     @Override
-    public List<DepositDto> getAll(UUID userId) {
+    public List<DepositDTO> getAll(UUID userId) {
         return this.depositRepository.findAllForUser(userId).stream().map(deposit -> {
             DepositType type = (deposit instanceof GiftDeposit) ? DepositType.GIFT : DepositType.MEAL;
-            return new DepositDto(
+            return new DepositDTO(
                     deposit.getAmount(),
                     type,
                     deposit.getDate(),

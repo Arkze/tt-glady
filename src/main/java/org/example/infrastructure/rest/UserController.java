@@ -3,7 +3,8 @@ package org.example.infrastructure.rest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.application.dtos.DepositDto;
+import org.example.application.dtos.DepositDTO;
+import org.example.domain.models.enums.DepositType;
 import org.example.domain.ports.input.users.CreateUserUseCase;
 import org.example.domain.ports.input.users.GetUserBalanceUseCase;
 import org.example.domain.ports.input.users.GetUserDepositsUseCase;
@@ -51,13 +52,23 @@ public class UserController {
         return ResponseEntity.ok(this.getUserBalance.getBalance(userId));
     }
 
+    @Operation(summary = "Get user balance for a specific type of deposits", responses = {
+            @ApiResponse(responseCode = "200", description = "Balance returned"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "500", description = "Internal error")
+    })
+    @GetMapping("/{userId}/{type}/balance")
+    public ResponseEntity<BigDecimal> getBalance(@PathVariable UUID userId, @PathVariable DepositType type) {
+        return ResponseEntity.ok(this.getUserBalance.getBalance(userId, type));
+    }
+
     @Operation(summary = "Get user deposits", responses = {
             @ApiResponse(responseCode = "200", description = "List of deposits"),
             @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "500", description = "Internal error")
     })
     @GetMapping("/{userId}/deposits")
-    public ResponseEntity<List<DepositDto>> getDeposits(@PathVariable UUID userId) {
+    public ResponseEntity<List<DepositDTO>> getDeposits(@PathVariable UUID userId) {
         return ResponseEntity.ok(this.getUserDeposits.getAll(userId));
     }
 

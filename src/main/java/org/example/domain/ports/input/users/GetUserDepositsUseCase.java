@@ -1,6 +1,6 @@
 package org.example.domain.ports.input.users;
 
-import org.example.application.dtos.DepositDto;
+import org.example.application.dtos.DepositDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,5 +16,5 @@ public interface GetUserDepositsUseCase {
      * @param userId the UUID of the user
      * @return a list of deposit DTOs
      */
-    List<DepositDto> getAll(UUID userId);
+    List<DepositDTO> getAll(UUID userId);
 }
